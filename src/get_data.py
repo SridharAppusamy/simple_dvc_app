@@ -12,15 +12,14 @@ def read_params(config_path):
 def get_Data(config_path):
     config = read_params(config_path)
     print(config)
-    data_path = path + '\\'+ config["data_source"]["s3_source"]
+    data_path =config["data_source"]["s3_source"]
+    print(data_path)
     df = pd.read_csv(data_path, sep=",", encoding='utf-8')
     return df
 
 if __name__=="__main__":
-    path=r"C:\Users\703202952\PycharmProjects\SIMPLE_APP"
     args=argparse.ArgumentParser()
-    default_value=path+"\params.yaml"
-    args.add_argument("--config",default=default_value)
+    args.add_argument("--config",default="params.yaml")
     parsed_args=args.parse_args()
     print(get_Data(config_path=parsed_args.config))
     #with open(r"C:\Users\703202952\PycharmProjects\SIMPLE_APP\params.yaml") as yaml_file:
